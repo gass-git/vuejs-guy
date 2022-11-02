@@ -1,26 +1,44 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+<script setup>
+	import {ref, computed} from 'vue'
+ 	import GuyComponent from '@/components/GuyComponent.vue'
+  
+	const 
+  	pixels = ref(100),
+  	position = computed(() => pixels.value + 'px'),
+    inputTxt = ref('');
+  
+	function move(direction){
+  	if(direction === 'left')
+      pixels.value -= 10;
+    else
+      pixels.value += 10;
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<template>
+  <button v-on:click="move('left')">
+    move left
+  </button>
+
+  <button v-on:click="move('right')">
+    move right
+  </button>
+  
+  <input v-model="inputTxt" />
+
+  <div id="area">
+    <GuyComponent v-bind:position="position" :feels="inputTxt" />
+  </div>
+</template>
+
+<style scoped>
+  button{
+    margin:10px;
+  }
+  #area{
+    margin-top:50px;
+    width:100%;
+    border-bottom:1px solid black;
+  }
 </style>
