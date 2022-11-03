@@ -1,4 +1,3 @@
-
 <script setup>
 	import {ref, computed} from 'vue'
  	import GuyComponent from '@/components/GuyComponent.vue'
@@ -25,10 +24,13 @@
     move right
   </button>
   
-  <input v-model="inputTxt" />
+  <label>Vue.js guy feels: </label><input v-model="inputTxt" />
 
   <div id="area">
-    <GuyComponent v-bind:position="position" :feels="inputTxt" />
+    <GuyComponent 
+      v-bind:position="position" 
+      v-bind:feels="inputTxt" 
+    />
   </div>
 </template>
 
